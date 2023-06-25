@@ -1,6 +1,7 @@
-export const Register = () => {
+const Register = () => {
     return (
         <>
         </>
     )
 }
+export default Register

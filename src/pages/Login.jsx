@@ -1,7 +1,8 @@
 
-export const Login = () => {
+ const Login = () => {
     return (
         <>
         </>
     )
-} 
+}
+export default Login 
