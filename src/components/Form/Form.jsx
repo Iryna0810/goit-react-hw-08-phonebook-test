@@ -3,6 +3,7 @@ import { FormWrapper, Button, Input } from '../styled';
 import { useDispatch, useSelector } from "react-redux";
 import {addContactsThunk} from 'components/redux/thunk'
 import { selectContacts } from '../redux/selectors';
+import { FormLabel } from '@chakra-ui/react';
 
 
 export const Form = () => {
@@ -44,30 +45,32 @@ export const Form = () => {
   }
 
   return <FormWrapper action="" onSubmit={handleSubmit}>
-    <label>Name
+    <FormLabel>Name
       <Input
         type="text"
         name="name"
         value={name}
+        placeholder="type your name"
         autoComplete="off"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
         onChange={handleInputChange}>
       </Input>
-    </label>
-    <label>Number
+    </FormLabel>
+    <FormLabel>Phone
       <Input
         type="tel"
         name="phone"
         value={phone}
+        placeholder="type your phone"
         autoComplete="off"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
         onChange={handleInputChange}>
         </Input>
-    </label>
+    </FormLabel>
     <Button type="submit">Add contacts</Button>
   </FormWrapper>
 };

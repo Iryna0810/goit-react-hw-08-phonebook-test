@@ -2,10 +2,12 @@
 // import { Title } from './Title/Title';
 // import { Contacts } from "./Contacts/Contacts";
 // import { Filter } from "./Filtter/Filter";
+import { PersistGate } from 'redux-persist/integration/react'
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-// import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 import { SharedLayout } from "./SharedLayout";
+import {persistor} from "../components/redux/store"
 // import { ContactsList } from "pages/Contacts";
 // import { Register } from "pages/Register";
 // import { Login } from "pages/Login";
@@ -33,13 +35,17 @@ export const App = () => {
       //   margin: '0 auto',
       //   borderRadius: '8px',
     // }}
+    <ChakraProvider>
+        <PersistGate loading={null} persistor={persistor}>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<ContactsList />}></Route>
           <Route path="login" element={<Login />}></Route>
           <Route path="register" element={<Register/>}></Route>
         </Route>
-</Routes>
+        </Routes>
+        </PersistGate>
+      </ChakraProvider>
   )
 }
 

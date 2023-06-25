@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Heading } from '@chakra-ui/react';
 
 export const Title = ({ title }) => (
-  <section>
-    <h2>{title}</h2>
-  </section>
+  <Heading size="2xl">{title}</Heading>
 );
 
 Title.propTypes = { title: PropTypes.string.isRequired, };
