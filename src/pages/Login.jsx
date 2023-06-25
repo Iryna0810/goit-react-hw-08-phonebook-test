@@ -2,10 +2,11 @@ import { Button, Container, FormLabel, Input} from "@chakra-ui/react"
 import { useState } from "react";
 import {FormWrapper} from '../components/styled'
 import { useDispatch } from "react-redux";
+import { login } from "components/redux/auth/auth-operation";
 
 
 const Login = () => {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -22,7 +23,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(email, password)
-        // dispatch(authOperations.logIn({ email, password }))
+        dispatch(login({ email, password }))
         setEmail('');
         setPassword('');
     }

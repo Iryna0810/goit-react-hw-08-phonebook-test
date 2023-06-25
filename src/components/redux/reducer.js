@@ -3,7 +3,7 @@ import { loadContactsReduser } from './contactsLoadSlice'
 import { filterReducer } from "./filterSlice";
 import { persistReducer } from "redux-persist";
 
-import { authReducer } from "./auth";
+import { authReducer } from "./auth/auth-slice";
 
 
 

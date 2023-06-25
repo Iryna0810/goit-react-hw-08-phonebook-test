@@ -3,9 +3,10 @@ import { useState } from "react";
 import {FormWrapper} from '../components/styled'
 import { useDispatch } from "react-redux";
 import { Form } from "react-router-dom";
+import { register } from "components/redux/auth/auth-operation";
 
 const Register = () => {
-    
+    const dispatch = useDispatch();
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -25,7 +26,7 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(name, email, password)
-        // dispatch(authOperations.logIn({ email, password }))
+        dispatch(register({ name, email, password }))
         setName('');
         setEmail('');
         setPassword('');
