@@ -2,7 +2,7 @@ import { Button, Container, FormLabel, Input} from "@chakra-ui/react"
 import { useState } from "react";
 import {FormWrapper} from '../components/styled'
 import { useDispatch } from "react-redux";
-import { login } from "components/redux/auth/auth-operation";
+import { login } from "components/redux/auth/auth-thunk";
 
 
 const Login = () => {

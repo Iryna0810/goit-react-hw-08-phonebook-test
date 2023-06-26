@@ -8,9 +8,6 @@ import { Route, Routes } from "react-router-dom";
 import { ChakraProvider } from '@chakra-ui/react'
 import { SharedLayout } from "./SharedLayout";
 import {persistor} from "../components/redux/store"
-// import { ContactsList } from "pages/Contacts";
-// import { Register } from "pages/Register";
-// import { Login } from "pages/Login";
 
 const ContactsList = lazy(() => import("../pages/Contacts"))
 const Register = lazy(() => import("../pages/Register"))
