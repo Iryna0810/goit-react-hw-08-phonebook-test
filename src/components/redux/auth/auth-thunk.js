@@ -10,8 +10,19 @@ export const register = createAsyncThunk('auth/register', async (body,{rejectWit
     }
 })
 
-export const getProfile = createAsyncThunk('auth/profile', (token) => {
-        getProfileFetch(token)
+export const getCurrentProfile = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+    console.log(thunkAPI.getState());
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    console.log(persistedToken)
+    if (persistedToken === null) return thunkAPI.rejectWithValue(); 
+    try {
+        const data = getProfileFetch(persistedToken);
+        return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);  
+    }
+   
 })
 
 export const login = createAsyncThunk('auth/login', async (body, {dispatch, rejectWithValue}) => {
@@ -24,10 +35,9 @@ export const login = createAsyncThunk('auth/login', async (body, {dispatch, reje
     }
 })
 
-export const logout = createAsyncThunk('auth/logout', async (token, { rejectWithValue }) => {
+export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
     try {
-        const data = await logoutFetch(token)
-        // dispatch(getProfile())
+        const data = await logoutFetch()
         return data;
     } catch (error) {
         return rejectWithValue(error.response.data.message);

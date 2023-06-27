@@ -33,7 +33,7 @@ const Login = () => {
     }
 
     useEffect(() => {
-        isAuth && navigate('/')
+        isAuth && navigate('/contacts')
     },[isAuth, navigate] )
 
     return (

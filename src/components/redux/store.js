@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { reducer } from './reducer'
-import storage from 'redux-persist/lib/storage'
+
 import {
   persistStore, persistReducer,
 FLUSH,
@@ -11,20 +11,16 @@ FLUSH,
   REGISTER,
 } from 'redux-persist'
 
-const persistConfig = {
-  key: 'auth',
-  storage,
-  whitelist: ['token'],
-}
+// const persistConfig = {
+//   key: 'auth',
+//   storage,
+//   whitelist: [`token`],
+// }
  
-const persistedReducer = persistReducer(persistConfig, reducer)
-
-// export const store = configureStore({
-//   persistedReducer,
-// });
+// const persistedReducer = persistReducer(persistConfig, reducer)
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

@@ -3,10 +3,14 @@ import { Title } from '../components/Title/Title';
 import { Contacts } from "../components/Contacts/Contacts";
 import { Filter } from "../components/Filtter/Filter";
 import { Container, Flex, VStack } from "@chakra-ui/react"
+import { selectToken } from "../components/redux/selectors";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 
 
- const ContactsList = () => {
+const ContactsList = () => {
+    const isAuth = useSelector(selectToken)
+    
     return(
      <Container p={10}>
             <Flex py={10}>

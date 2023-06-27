@@ -18,7 +18,7 @@ export const SharedLayout = () => {
     const handleLogout = () => {
         dispatch(logout())
         dellToken()
-        navigate('/login')
+        navigate('/')
         console.log(name)
     }
 
@@ -27,36 +27,31 @@ export const SharedLayout = () => {
             <Header>
                 <nav>
                     <Flex alignItems="flex-end" justifyContent="center">
-                        <Link to="/" end>Contacts</Link>
-                        {!isAuth
-                        ? <>
-                         <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
+                        {!isAuth ? 
+                        <>
+                        <Link to="/login">Login</Link>
+                        <Link to="/register">Register</Link>
                         </>
-                        : <Link to="/">
+                         : <Flex alignItems="flex-end" justifyContent="center"> <Link to="/contacts">Contacts</Link>
                             <div style={{
                                 display: "flex",
-                                gap: '20px',
-                            }
-                    }>
+                                    gap: '50px',    
+                            }}>
                             <p>Welcome {name}</p>       
-                                    <button onClick={() =>{handleLogout()}}
-                                    >Logout</button>
+                            <button onClick={() =>{handleLogout()}}>Logout</button>
                     </div>
-                        
-                        </Link>
+                        </Flex>
                     }                   
                         </Flex>
                 </nav>
             </Header>
             <Suspense fallback={<div>Loading page...</div>}>
                 <Container maxW="container.lg" p={10}>
-            <Flex py={10}>
-                        <VStack
-                            w="full"
+                <Flex py={10}>
+                <VStack
+                    w="full"
                     h="full" p={10}
-                    spacing={10}
-                    
+                    spacing={10}                  
                 bg="blue.50"
                 >
         <Outlet />

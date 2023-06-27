@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfile, login, logout, register } from "./auth-thunk";
+import { getCurrentProfile, login, logout, register } from "./auth-thunk";
 
 
 const initialState = {
@@ -7,7 +7,6 @@ const initialState = {
     token: null,
     isLoggedIn: false,
     error: '',
-    profile: null,
 }
 
 const handlePending = (state) => {
@@ -29,26 +28,20 @@ const handleFulfiled = (state, { payload }) => {
     console.log(state.token)
 }
 
-const handleFulfiledProfile = (state, action) => {
+const handleFulfiledProfile = (state, { payload }) => {
     state.isLoggedIn = true
-    state.profile = action.payload.name
-    // state.user.email = payload.email
-    // state.user.email = payload.email
-
-    console.log(action)
+    state.user = payload
     console.log(state.user)
-    
 }
 
 const handleFulfiledLogout = (state) => {
-    state = {
-    user: {name:'', email:'' },
-    token: null,
-    isLoggedIn: false,
-    error: '',
-    profile: null,
+    state.user = { name: '', email: '' };
+    state.token = null;
+    state.isLoggedIn = false;
+    state.error = '';
+    state.profile = null;
 }
-}
+
 
 const authSlice = createSlice({
     name: 'auth',
@@ -56,7 +49,7 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(login.fulfilled, handleFulfiled)
-            .addCase(getProfile.fulfilled, handleFulfiledProfile)
+            .addCase(getCurrentProfile.fulfilled, handleFulfiledProfile)
             .addCase(logout.fulfilled,handleFulfiledLogout)
             .addMatcher(({ type }) => type.endsWith('/pending'), handlePending)
             .addMatcher(({ type }) => type.endsWith('/rejected'), handleRejected)
