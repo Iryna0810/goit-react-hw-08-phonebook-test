@@ -39,18 +39,6 @@ const Login = () => {
     return (
         <Container p={10}>
             <FormWrapper action="" onSubmit={handleSubmit}>
-                 {/* <FormLabel >
-                    Name
-                </FormLabel>
-                <Input
-                    placeholder="Input your name"
-                    type="text"
-                    pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                    required
-                    name="name"
-                    value={name}
-                    onChange={handleChange}
-                ></Input> */}
                 <FormLabel mt={10}>
                     Email
                 </FormLabel>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCurrentProfile, login, logout, register } from "./auth-thunk";
+import { getCurrentProfile, login, logout } from "./auth-thunk";
 
 
 const initialState = {

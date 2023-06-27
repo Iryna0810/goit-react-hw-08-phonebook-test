@@ -1,8 +1,7 @@
-import { Button, Container, FormControl, FormLabel, Input} from "@chakra-ui/react"
+import { Button, Container, FormLabel, Input} from "@chakra-ui/react"
 import { useState } from "react";
 import {FormWrapper} from '../components/styled'
 import { useDispatch } from "react-redux";
-import { Form } from "react-router-dom";
 import { register } from "components/redux/auth/auth-thunk";
 
 const Register = () => {

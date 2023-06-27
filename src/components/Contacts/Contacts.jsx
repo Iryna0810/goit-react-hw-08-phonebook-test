@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { List, Button } from '../styled';
+import { List } from '../styled';
+import { Button} from "@chakra-ui/react"
 import { useSelector, useDispatch } from "react-redux";
 import { selectVisibleContacts, selectIsLoading, selectError} from '../redux/selectors'
 import { getContactsThunk, deleteContactsThunk } from 'components/redux/thunk';
@@ -31,7 +32,7 @@ export const Contacts = () => {
             <li key={id}>
             <p>{name}</p>
             <p>{phone}</p>
-            <Button type="submit"
+            <Button bgColor="blue.100" type="submit"
                 onClick={() => handleDelete(id)}
             >Delete</Button>
         </li>)}

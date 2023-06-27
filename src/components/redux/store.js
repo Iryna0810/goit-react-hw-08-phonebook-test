@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { reducer } from './reducer'
 
 import {
-  persistStore, persistReducer,
+  persistStore,
 FLUSH,
   REHYDRATE,
   PAUSE,
