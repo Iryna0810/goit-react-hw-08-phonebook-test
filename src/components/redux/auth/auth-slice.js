@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfile, login, register } from "./auth-thunk";
+import { getProfile, login, logout, register } from "./auth-thunk";
 
 
 const initialState = {
-    user: { name: null, email: null, password: null },
+    user: {name:'', email:'' },
     token: null,
     isLoggedIn: false,
     error: '',
+    profile: null,
 }
 
 const handlePending = (state) => {
@@ -16,23 +17,37 @@ const handlePending = (state) => {
 
 const handleRejected = (state, {error, payload}) => {
     state.isLoggedIn = false
-    state.error = error ? error.message : payload
+    state.error = payload ?? error.message
 }
 
 const handleFulfiled = (state, { payload }) => {
-    // state.user.name = payload.user.name
-    // state.user.email = payload.user.email
+    state.user.name = payload.user.name;
+    state.user.email = payload.user.email;
     state.isLoggedIn = true
-    state.token = payload.token
-    console.log(payload)
-    console.log(state.user.name)
+    state.token = payload.token   
+ 
     console.log(state.token)
 }
 
-const handleFulfiledProfile = (state, { payload }) => {
-    // state.isLoggedIn = true
-    state.user.name = payload.user.name
-    state.user.email = payload.user.email
+const handleFulfiledProfile = (state, action) => {
+    state.isLoggedIn = true
+    state.profile = action.payload.name
+    // state.user.email = payload.email
+    // state.user.email = payload.email
+
+    console.log(action)
+    console.log(state.user)
+    
+}
+
+const handleFulfiledLogout = (state) => {
+    state = {
+    user: {name:'', email:'' },
+    token: null,
+    isLoggedIn: false,
+    error: '',
+    profile: null,
+}
 }
 
 const authSlice = createSlice({
@@ -41,7 +56,8 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(login.fulfilled, handleFulfiled)
-            // .addCase(getProfile.fulfilled, handleFulfiledProfile)
+            .addCase(getProfile.fulfilled, handleFulfiledProfile)
+            .addCase(logout.fulfilled,handleFulfiledLogout)
             .addMatcher(({ type }) => type.endsWith('/pending'), handlePending)
             .addMatcher(({ type }) => type.endsWith('/rejected'), handleRejected)
         

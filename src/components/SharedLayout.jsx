@@ -1,15 +1,26 @@
 import { Suspense } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Header, Link } from "./SharedLayout.styled";
 import { Container, Flex, VStack } from "@chakra-ui/react"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {selectIsLoggedIn, selectUserName} from '../components/redux/selectors'
-
+import { selectToken } from "../components/redux/selectors";
+import { logout } from "./redux/auth/auth-thunk";
+import { dellToken } from "services/auth";
 
 
 export const SharedLayout = () => {
+    const isAuth = useSelector(selectToken)
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const isLoggedIn = useSelector(selectIsLoggedIn)
     const name = useSelector(selectUserName)
+    const handleLogout = () => {
+        dispatch(logout())
+        dellToken()
+        navigate('/login')
+        console.log(name)
+    }
 
     return (
         <Container maxW="80vw">
@@ -17,19 +28,20 @@ export const SharedLayout = () => {
                 <nav>
                     <Flex alignItems="flex-end" justifyContent="center">
                         <Link to="/" end>Contacts</Link>
-                        {!isLoggedIn
+                        {!isAuth
                         ? <>
                          <Link to="/login">Login</Link>
                     <Link to="/register">Register</Link>
                         </>
-                        : <Link to="/userMenu">
+                        : <Link to="/">
                             <div style={{
                                 display: "flex",
                                 gap: '20px',
                             }
                     }>
-                            <p>{name}</p>       
-                            <button>Logout</button>
+                            <p>Welcome {name}</p>       
+                                    <button onClick={() =>{handleLogout()}}
+                                    >Logout</button>
                     </div>
                         
                         </Link>
